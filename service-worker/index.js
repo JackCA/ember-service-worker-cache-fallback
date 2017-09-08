@@ -16,7 +16,7 @@ self.addEventListener('fetch', (event) => {
   if (urlMatchesAnyPattern(request.url, PATTERN_REGEX)) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
-        return fetch(request)
+        return fetch(request, { credentials: 'same-origin' })
           .then((response) => {
             cache.put(request, response.clone());
             return response;
